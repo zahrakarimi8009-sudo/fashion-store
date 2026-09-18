@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>راهنمای کامل پروژه | فروشگاه نیلا</title>
+<style>
+  :root{ --pink:#ec4d84; --lilac:#9c5bd6; --peach:#ff8f5e; --ink:#3b2530; --muted:#8a6a76; --line:#f3d3de; --bg:#fff7f2; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:Tahoma,'Segoe UI',Arial,sans-serif; background:var(--bg); color:var(--ink); line-height:2; }
+  .hero{ background:linear-gradient(158deg,#241019,#2e1422 55%,#1c0c14); color:#fff; padding:3rem 1.5rem 2.6rem; text-align:center; }
+  .hero h1{ margin:0 0 .5rem; font-size:1.7rem; }
+  .hero p{ margin:0; color:rgba(255,255,255,.65); font-size:.9rem; }
+  .wrap{ max-width:860px; margin:-1.4rem auto 3rem; padding:0 1rem; }
+  section{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:1.4rem 1.6rem; margin-bottom:1.1rem; box-shadow:0 10px 30px rgba(180,60,100,.06); }
+  h2{ font-size:1.1rem; margin:0 0 .8rem; color:#7a2c4e; border-bottom:2px solid var(--line); padding-bottom:.5rem; }
+  h3{ font-size:.95rem; margin:1rem 0 .4rem; }
+  p{ margin:.4rem 0; font-size:.88rem; }
+  ul,ol{ font-size:.88rem; padding-inline-start:1.4rem; margin:.4rem 0; }
+  li{ margin:.25rem 0; }
+  code{ direction:ltr; unicode-bidi:embed; background:#fdf0f5; border:1px solid var(--line); border-radius:6px; padding:.05rem .45rem; font-size:.78rem; color:#a12742; display:inline-block; }
+  .table{ width:100%; border-collapse:collapse; font-size:.82rem; margin:.6rem 0; }
+  .table th{ background:#fdf0f5; color:#7a2c4e; text-align:right; padding:.5rem .7rem; border:1px solid var(--line); font-size:.8rem; }
+  .table td{ padding:.45rem .7rem; border:1px solid var(--line); vertical-align:top; }
+  .table tr:nth-child(even) td{ background:#fffbf9; }
+  .tip{ background:#fff4e6; border:1px solid #ffd9a8; border-radius:12px; padding:.7rem 1rem; font-size:.82rem; margin:.7rem 0; }
+  .good{ background:#e7f7ef; border:1px solid #bfe8d2; color:#1d6b46; border-radius:12px; padding:.7rem 1rem; font-size:.82rem; margin:.7rem 0; }
+  .warn{ background:#fdecef; border:1px solid #f6c2cd; color:#a12742; border-radius:12px; padding:.7rem 1rem; font-size:.82rem; margin:.7rem 0; }
+  .flow{ direction:rtl; text-align:center; font-size:.8rem; background:#fdf0f5; border:1px dashed var(--pink); border-radius:12px; padding:.8rem 1rem; margin:.7rem 0; line-height:2.4; }
+  .flow b{ color:#a12742; }
+  .cred td:first-child{ font-weight:800; direction:ltr; text-align:right; }
+  .toc a{ color:var(--pink); text-decoration:none; font-weight:700; font-size:.85rem; }
+  .toc li{ list-style:none; margin:.2rem 0; }
+  .toc{ padding:0; }
+  kbd{ background:#fff; border:1px solid #d9c2cc; border-bottom-width:2px; border-radius:6px; padding:.05rem .5rem; font-size:.78rem; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>فروشگاه نیلا — NILA FASHION</h1>
+  <p>راهنمای کامل پروژه: معماری، نصب، بخش‌ها، اطلاعات ورود و رفع ایرادات</p>
+</div>
+
+<div class="wrap">
+
+<section class="toc">
+  <h2>فهرست</h2>
+  <ul>
+    <li><a href="#s1">۱. این پروژه چیست؟</a></li>
+    <li><a href="#s2">۲. معماری: همه‌چیز چطور با هم کار می‌کند؟</a></li>
+    <li><a href="#s3">۳. نقشه‌ی فایل‌ها</a></li>
+    <li><a href="#s4">۴. نصب گام‌به‌گام (روی WAMP / XAMPP)</a></li>
+    <li><a href="#s5">۵. اطلاعات ورود (نمایشی)</a></li>
+    <li><a href="#s6">۶. پنل مدیریت — چه کارهایی واقعاً انجام می‌شود؟</a></li>
+    <li><a href="#s7">۷. پنل کاربری</a></li>
+    <li><a href="#s8">۸. آپلود تصویر محصول</a></li>
+    <li><a href="#s9">۹. منطق «خریدار تأییدشده»</a></li>
+    <li><a href="#s10">۱۰. رفع ایرادات (تشخیص مشکل)</a></li>
+  </ul>
+</section>
+
+<section id="s1">
+  <h2>۱. این پروژه چیست؟</h2>
+  <p>یک فروشگاه اینترنتی زعفرانی/زنانه، کاملاً فارسی و راست‌چین، <b>بدون هیچ فریمورکی</b> (نه Vue، نه React، نه Laravel). پروژه از سه لایه ساخته شده:</p>
+  <ul>
+    <li><b>فرانت‌اند:</b> صفحات HTML + CSS تمیز + جاوااسکریپت خالص</li>
+    <li><b>بک‌اند:</b> فایل‌های PHP در پوشه‌ی <code>api/</code> (یک REST API کوچک با خروجی JSON)</li>
+    <li><b>داده:</b> دیتابیس MySQL با نام <code>nila_shop</code> (فایل آماده: <code>nila_shop.sql</code>)</li>
+  </ul>
+  <div class="tip">نکته‌ی مهم طراحی: اگر PHP/دیتابیس در دسترس نباشد (مثلاً کسی فایل‌ها را مستقیم در مرورگر باز کند)، صفحات با <b>داده‌های نمایشی</b> کار می‌کنند و هیچ خطایی نمی‌دهند. یعنی کد هم برای یادگیری و هم برای اجرا واقعیت‌گرایانه است.</div>
+</section>
+
+<section id="s2">
+  <h2>۲. معماری: همه‌چیز چطور با هم کار می‌کند؟</h2>
+  <p>وقتی مثلاً در پنل مدیریت محصولی می‌سازی، این زنجیره اتفاق می‌افتد:</p>
+  <div class="flow">
+    کاربر روی «ثبت و افزودن محصول» می‌زند<br>
+    <b>js/admin.js</b> فرم را می‌خواند → درخواست (JSON یا FormData برای آپلود عکس)<br>
+    → <b>api/admin.php</b> (سرور) درخواست را اعتبارسنجی می‌کند<br>
+    → در دیتابیس <code>products</code> ثبت می‌کند (و فایل تصویر را در <code>images/</code> می‌نویسد)<br>
+    → جواب JSON برمی‌گردد → پنل تازه می‌شود و <b>صفحه‌ی اصلی فروشگاه هم همان محصول جدید را می‌بیند</b> (چون از <code>api/products.php</code> می‌خواند)
+  </div>
+  <h3>دو «سشن» جداگانه</h3>
+  <ul>
+    <li><b>مشتری:</b> صفحه‌ی <code>login.php</code> بعد از ورود موفق، <code>$_SESSION['nila_user']</code> را می‌سازد. همه‌ی APIهای مشتری (سفارش، پیام، اعلان، پروفایل) فقط با این سشن کار می‌کنند.</li>
+    <li><b>مدیر:</b> اکشن <code>login</code> در <code>api/admin.php</code> سشن <code>$_SESSION['nila_admin']</code> را می‌سازد. ۲۱ اکشن مدیریت (داشبورد، سفارش، کاربر، محصول، پیام، تنظیمات...) فقط با این سشن مجازند.</li>
+  </ul>
+  <h3>رمز عبور</h3>
+  <p>داده‌های نمونه با روش نمایشی <code>sha256 + نمک ثابت</code> ذخیره شده‌اند (برای سادگی در دیتابیس اولیه)؛ حساب‌های جدید با <code>password_hash()</code> امن ساخته می‌شوند. تابع <code>verify_password()</code> در <code>config/db.php</code> هر دو را تشخیص و راستی‌آزمایی می‌کند.</p>
+</section>
+
+<section id="s3">
+  <h2>۳. نقشه‌ی فایل‌ها</h2>
+  <table class="table">
+    <tr><th>فایل / پوشه</th><th>وظیفه</th></tr>
+    <tr><td><code>index.html</code> + <code>js/home.js</code></td><td>صفحه‌ی اصلی: اسلایدر، محصولات جدید/پرفروش/تخفیف‌دار (از دیتابیس)، دسته‌بندی‌ها</td></tr>
+    <tr><td><code>shop.html</code> + <code>js/shop.js</code></td><td>فروشگاه با فیلتر دسته/بازه‌ی قیمت/مرتب‌سازی</td></tr>
+    <tr><td><code>product.html</code> + <code>js/product.js</code></td><td>جزئیات محصول: گالری + زوم، سایز/رنگ/تعداد، تب نظرات (با فرم ثبت نظر و برچسب «خریدار تأییدشده»)</td></tr>
+    <tr><td><code>cart.html</code> / <code>wishlist.html</code></td><td>سبد خرید و علاقه‌مندی (در localStorage)</td></tr>
+    <tr><td><code>checkout.html</code> + <code>js/checkout.js</code></td><td>فاکتور: نوار ارسال رایگان، کد تخفیف <code>NILA10</code>، ثبت سفارش (واقعی در دیتابیس)</td></tr>
+    <tr><td><code>login.php</code> + <code>login_bridge.php</code> + <code>js/login-ui.js</code></td><td>ورود/ثبت‌نام مشتری (PHP) + طراحی انیمیشنی صفحه</td></tr>
+    <tr><td><code>account.html</code> + <code>js/account.js</code></td><td>پنل کاربری: پروفایل، سفارش‌های من، پیام‌ها، اعلان‌ها، تغییر رمز، تنظیمات</td></tr>
+    <tr><td><code>admin.php</code> + <code>js/admin.js</code></td><td><b>پنل مدیریت</b> — صفحه‌ی اصلی پنل، PHP واقعی است و هنگام لود، اتصال دیتابیس را در سمت سرور چک می‌کند</td></tr>
+    <tr><td><code>diag.php</code></td><td>صفحه‌ی تشخیص سلامت: ۷ چراغ (PHP، PDO، اتصال، جداول، داده، ورود ادمین، پوشه‌ی تصاویر) + راه‌حل هر خطا</td></tr>
+    <tr><td><code>api/products.php</code></td><td>لیست محصولات فعال (برای فروشگاه و پنل)</td></tr>
+    <tr><td><code>api/reviews.php</code></td><td>نظرات محصول + ثبت نظر (با تشخیص «خریدار تأییدشده»)</td></tr>
+    <tr><td><code>api/orders.php</code></td><td>سفارش‌های مشتری + ثبت سفارش جدید (با ایجاد اعلان)</td></tr>
+    <tr><td><code>api/account.php</code></td><td>پروفایل (خواندن/ویرایش) + تغییر رمز</td></tr>
+    <tr><td><code>api/messages.php</code></td><td>گفت‌وگوی مشتری با پشتیبانی (ارسال/خواندن/علامت خوانده‌شده)</td></tr>
+    <tr><td><code>api/notifications.php</code></td><td>اعلان‌های مشتری (خواندن/همه را خوانده‌شده)</td></tr>
+    <tr><td><code>api/admin.php</code></td><td>۲۱ اکشن پنل مدیریت: ورود/خروج، داشبورد، سفارش (وضعیت/حذف)، کاربر (افزودن/حذف)، مدیر (افزودن/حذف)، پیام (خواندن/پاسخ)، محصول (افزودن با آپلود تصویر/ویرایش/حذف/فعال-غیرفعال)، تنظیمات</td></tr>
+    <tr><td><code>config/db.php</code></td><td>اتصال PDO + تابع‌های رمز — <b>تنها فایلی که ممکن است برای هاستینگ باید ویرایش شود</b></td></tr>
+    <tr><td><code>nila_shop.sql</code></td><td>کل دیتابیس: ۱۱ جدول + داده‌های نمونه (۸ محصول، ۵ سفارش، ۱۰ نظر، ۳ مدیر، پیام‌ها، اعلان‌ها، تنظیمات سایت)</td></tr>
+    <tr><td><code>js/main.js</code></td><td>منوی سیت‌واید، سبد/علاقه‌مندی (localStorage)، کارت محصول، تاریخ جلالی، توابع مشترک</td></tr>
+    <tr><td><code>js/products.js</code></td><td>داده‌های نمایشی + <code>nilaLoadProducts()</code> که داده را از دیتابیس می‌گیرد (با گارد زمان ۱.۵ ثانیه)</td></tr>
+    <tr><td><code>css/style.css</code></td><td>کل استایل سایت (پالت صورتی/یاسی/هلویی، فونت استedad)</td></tr>
+    <tr><td><code>images/</code></td><td>تصاویر محصولات، بنرها و <b>تصاویر آپلودشده توسط مدیر</b> (با پیشوند <code>up-</code>)</td></tr>
+  </table>
+</section>
+
+<section id="s4">
+  <h2>۴. نصب گام‌به‌گام (روی WAMP / XAMPP)</h2>
+  <ol>
+    <li>WAMP (یا XAMPP) را نصب و روشن کن (آیکون سبز در سینی سیستم).</li>
+    <li>پوشه‌ی <code>fashion-store</code> را داخل <code>D:\wamp64\www</code> کپی کن (پسوند PHP باید فعال باشد — در WAMP پیش‌فرض فعال است).</li>
+    <li>به <code>http://localhost/phpmyadmin</code> برو → برگه‌ی <b>Import</b> → فایل <code>nila_shop.sql</code> (داخل پوشه‌ی پروژه) را انتخاب کن → <b>Execute</b>.</li>
+    <li>اگر نام کاربری/رمز MySQL تو با پیش‌فرض فرق دارد، فایل <code>config/db.php</code> را باز کن و مقادیر <code>DB_USER</code> / <code>DB_PASS</code> / <code>DB_NAME</code> را اصلاح کن. (پیش‌فرض: <code>root</code> با رمز خالی و دیتابیس <code>nila_shop</code> — همانی که در WAMP/XAMPP پیش‌فرض است.)</li>
+    <li>صفحه را باز کن: <code>http://localhost/fashion-store</code></li>
+    <li><b>سلامت‌سنجی:</b> <code>http://localhost/fashion-store/diag.php</code> — اگر هر ۷ چراغ سبز بود، همه‌ی بخش‌ها روی دیتابیس واقعی کار می‌کنند.</li>
+  </ol>
+  <div class="good">✅ اگر diag.php همه سبز است: چیزی دیگر لازم نیست. پنل مدیریت (<code>admin.php</code>) و پنل کاربری واقعاً به دیتابیس وصل‌اند.</div>
+  <h3>انتقال به هاستینگ (cPanel و مشابه)</h3>
+  <ul>
+    <li>فایل‌ها را در <code>public_html</code> (یا ساب‌دومین) آپلود کن.</li>
+    <li>در cPanel → MySQL Databases دیتابیس بساز، کاربر بده و <code>nila_shop.sql</code> را از phpMyAdmin هاست ایمپورت کن.</li>
+    <li>فقط <code>config/db.php</code> را با نام کاربری/رمز/دیتابیس هاست ویرایش کن.</li>
+    <li>مطمئن شو PHP هاست نسخه‌ی ۷.۴ یا بالاتر دارد (پیشنهاد: ۸.x).</li>
+  </ul>
+</section>
+
+<section id="s5">
+  <h2>۵. اطلاعات ورود (نمایشی)</h2>
+  <table class="table cred">
+    <tr><th>نقش</th><th>ورود</th><th>رمز</th></tr>
+    <tr><td>مدیر کل (پنل مدیریت)</td><td><code>admin@nila.shop</code></td><td><code>nila2026</code></td></tr>
+    <tr><td>مدیر فروشگاه</td><td><code>manager@nila.shop</code></td><td><code>123456</code></td></tr>
+    <tr><td>پشتیبانی</td><td><code>support@nila.shop</code></td><td><code>123456</code></td></tr>
+    <tr><td>مشتری نمونه (مریم)</td><td><code>09123456789</code></td><td><code>123456</code></td></tr>
+    <tr><td>مشتری‌های دیگر</td><td>شماره‌ها در جدول users</td><td><code>123456</code></td></tr>
+  </table>
+  <div class="tip">مدیر/کاربری که از پنل مدیریت اضافه می‌کنی، رمز اولیه‌اش <code>123456</code> است و ایمیلش خودکار ساخته می‌شود (مثل <code>ph0912...@nila.shop</code>) — در همان لحظه به مدیر جدید نمایش داده می‌شود.</div>
+</section>
+
+<section id="s6">
+  <h2>۶. پنل مدیریت — چه کارهایی واقعاً روی دیتابیس انجام می‌شود؟</h2>
+  <table class="table">
+    <tr><th>بخش</th><th>عملیات واقعی</th></tr>
+    <tr><td>داشبورد</td><td>تعداد سفارش‌ها/کاربران/محصول‌ها/درآمد (جمعی سفارش‌های غیرلغو‌شده) + ۴ سفارش اخیر — همه از MySQL</td></tr>
+    <tr><td>سفارش‌ها</td><td>لیست کامل، <b>تغییر وضعیت</b> (ثبت شده/در انتظار پرداخت/در حال ارسال/تحویل شده/لغو) و <b>حذف</b> — در پنل مشتری هم لحظه‌ای دیده می‌شود</td></tr>
+    <tr><td>کاربران</td><td>لیست + <b>افزودن</b> (با کنترل تکراری بودن شماره) + <b>حذف</b></td></tr>
+    <tr><td>مدیران و دسترسی</td><td>لیست + سطح دسترسی (مدیر کل/مدیر فروشگاه/پشتیبانی/مشتری) + افزودن/حذف (حذف آخرین مدیر کل مسدود است)</td></tr>
+    <tr><td>پیام‌ها</td><td>گفت‌وگوهای همه‌ی مشتریان + علامت خوانده‌شده + <b>پاسخ</b> (پاسخ تو در پنل همان مشتری ظاهر می‌شود)</td></tr>
+    <tr><td>محصولات</td><td>لیست + <b>افزودن</b> (با پیش‌نمایش زنده‌ی کارت + آپلود تصویر) + <b>ویرایش</b> (فرم خودکار پر می‌شود) + <b>حذف</b> + <b>فعال/غیرفعال</b> (غیرفعال‌ها از فروشگاه پنهان می‌شوند). هر تغییر <b>لحظه‌ای در صفحه‌ی اصلی و صفحه‌ی محصول اعمال می‌شود</b> چون فروشگاه از دیتابیس می‌خواند.</td></tr>
+    <tr><td>تنظیمات سایت</td><td>نام فروشگاه، تماس، ایمیل، آدرس، هزینه ارسال، سقف ارسال رایگان، کد تخفیف — ذخیره در جدول <code>settings</code></td></tr>
+  </table>
+  <p>نوار وضعیت بالای پنل (نشانگر کوچک سبز/نارنجی) به تو می‌گوید آیا این لحظه دیتابیس وصل است یا نه. اگر دیتابیس نباشد، یک نوار قرمز بزرگ هم با دلیل دقیق خطا بالا می‌آید.</p>
+</section>
+
+<section id="s7">
+  <h2>۷. پنل کاربری (account.html)</h2>
+  <ul>
+    <li><b>پروفایل من:</b> اطلاعات واقعی از دیتابیس + ویرایش (با کنترل تکراری بودن شماره)</li>
+    <li><b>سفارش‌های من:</b> سفارش‌های واقعی با وضعیت، اقلام و جمع‌بندی + اعلان «ثبت سفارش»</li>
+    <li><b>پیام‌ها:</b> گفت‌وگو با پشتیبانی (پاسخ ادمین همان‌جا ظاهر می‌شود)</li>
+    <li><b>اعلان‌ها:</b> اعلان‌های واقعی + «همه را خوانده‌شده علامت بزن»</li>
+    <li><b>تغییر رمز عبور:</b> با راستی‌آزمایی رمز فعلی — ذخیره در دیتابیس</li>
+    <li><b>تنظیمات:</b> ترجیحات حساب (ذخیره در مرورگر)</li>
+  </ul>
+</section>
+
+<section id="s8">
+  <h2>۸. آپلود تصویر محصول</h2>
+  <ul>
+    <li>در فرم «افزودن/ویرایش محصول» دو فیلد دارد: <b>تصویر محصول</b> و <b>تصویر دوم</b> (هنگام هاور روی کارت).</li>
+    <li>فرمت: JPEG / PNG / WEBP — حداکثر ۳ مگابایت. تصویر انتخاب‌شده <b>زنده</b> روی کارت پیش‌نمایش دیده می‌شود.</li>
+    <li>فایل با نام <code>up-...jpg</code> در پوشه‌ی <code>images/</code> ذخیره و <b>مسرش در دیتابیس</b> نوشته می‌شود؛ پس بعد از رفرش و حتی تغییر سرور (با کپی images) جا دارد.</li>
+    <li>اگر فایلی انتخاب نکنی، تصویر پیش‌فرض همان دسته به‌کار می‌رود.</li>
+    <li>هنگام <b>ویرایش</b> اگر تصویر جدید بگذاری، قبلی (اگر آپلودشده باشد) پاک می‌شود. هنگام <b>حذف محصول</b> هم تصویر آپلودشده‌اش حذف می‌شود — تصاویر نمونه‌ی اصلی (p1.jpg و...) هرگز دست نمی‌خورند.</li>
+  </ul>
+</section>
+
+<section id="s9">
+  <h2>۹. منطق «خریدار تأییدشده»</h2>
+  <p>وقتی یک <b>مشتری واردشده</b> نظری ثبت می‌کند، API بررسی می‌کند آیا در یکی از سفارش‌های این کاربر، آن محصول وجود داشته یا نه:</p>
+  <div class="flow">
+    <code>reviews.user_id = کاربرِ لاگین‌شده</code> + <code>orders.user_id = همان کاربر</code> + <code>order_items.product_id = همان محصول</code><br>
+    → اگر هر سه جور شدند: <b>is_verified = 1</b> → برچسب «خریدار تأییدشده» روی نظر
+  </div>
+  <ul>
+    <li>برچسب <b>دینامیک</b> است: هر خریداری که آن محصول را خریده باشد، هر وقت نظر بدهد برچسب می‌گیرد.</li>
+    <li>نظری که بدون ورود ثبت شود (یا محصولی که کاربر نخریده) برچسب نمی‌گیرد.</li>
+    <li>دیتابیس نمونه‌ای که تحویل داده می‌شود ۱۰ نظر آماده روی <b>هر ۸ محصول</b> دارد (چندتای تأییدشده) تا ظاهر بخش نظرات کامل باشد.</li>
+  </ul>
+</section>
+
+<section id="s10">
+  <h2>۱۰. رفع ایرادات (تشخیص مشکل)</h2>
+  <table class="table">
+    <tr><th>علامت</th><th>دلیل</th><th>راه‌حل</th></tr>
+    <tr><td>صفحه‌ی «اتصال به پایگاه داده برقرار نشد» یا کد PHP خام</td><td>PHP روی Apache اجرا نمی‌شود / آدرس اشتباه</td><td>WAMP را روشن کن و حتماً با <code>http://localhost/fashion-store/...</code> (نه file://) باز کن</td></tr>
+    <tr><td>نوار قرمز بالای <code>admin.php</code>: «اتصال برقرار نیست»</td><td>دیتابیس ایمپورت نشده یا رمز MySQL نمی‌خواند</td><td>راهنمای داخل همان نوار را دنبال کن (Import در phpMyAdmin / ویرایش config/db.php) — متن دقیق خطا هم آنجاست</td></tr>
+    <tr><td>diag.php: چراغ «اتصال» قرمز با Access denied</td><td>رمز root با پیش‌فرض فرق دارد</td><td>در WAMP: WampMenu → MySQL → Users Rights یا در config/db.php مقدار DB_PASS را تنظیم کن</td></tr>
+    <tr><td>پنل مدیریت «حالت نمایشی» است</td><td>دیتابیس نیست — همه‌چیز نمونه است</td><td>همان دو مرحله‌ی بالا؛ بعد از ایمپورت، Ctrl+F5</td></tr>
+    <tr><td>برچسب «خریدار تأییدشده» نمی‌خورد</td><td>کاربر وارد نشده، یا آن محصول در سفارش‌هایش نیست</td><td>با حسابی وارد شو که آن محصول را خریده (مریم: 09123456789 محصول ۱ و ۷ را خریده)</td></tr>
+    <tr><td>محصول جدید در صفحه‌ی اصلی نیست</td><td>غیرفعال شده یا قیمت/نام ناقص بود</td><td>در پنل وضعیت «موجود/فعال» را چک کن؛ یا صفحه را رفرش کن</td></tr>
+    <tr><td>تغییرات «با رفرش برمی‌گردند»</td><td>همان نشانه‌ی «دیتابیس نیست» — تو حالت نمایشی هستی</td><td>diag.php را باز کن؛ تا چراغ‌ها سبز نشود، هیچ چیزی ذخیره نمی‌شود</td></tr>
+    <tr><td>404 Not Found</td><td>آدرس اشتباه</td><td>نام پوشه باید دقیقاً <code>fashion-store</code> باشد داخل <code>www</code></td></tr>
+  </table>
+  <div class="warn">قانون طلایی: هر مشکلی که «ذخیره نمی‌شود» می‌بینی، ۹۹٪ همان است: دیتابیس وصل نیست. <code>diag.php</code> را باز کن — راه‌حل همان‌جا زیر چراغ قرمز نوشته شده است.</div>
+</section>
+
+<p style="text-align:center; color:#b08a99; font-size:.75rem; margin-top:1.5rem;">فروشگاه نیلا — NILA FASHION | نسخه‌ی نهایی (v7) | HTML + CSS + JS خالص و PHP/MySQL بدون فریمورک</p>
+
+</div>
+</body>
+</html>
